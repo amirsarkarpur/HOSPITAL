@@ -82,7 +82,6 @@ If you have any questions or suggestions, feel free to contact us at [your-email
 go
 Copy code
 
-این متن را می‌توانید مستقیماً در فایل `README.md` خود قرار دهید و در مخزن گیتهاب استفاده کنید. فراموش نکنید که لینک‌های خاص مثل آدرس گیتهاب و ایمیل را با اطلاعات خودتان جایگزین کنید.
 
 
 
