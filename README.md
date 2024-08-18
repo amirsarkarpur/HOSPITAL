@@ -22,14 +22,12 @@ The **HOSPITAL** project is a Django-based web application designed to manage ho
    ```bash
    git clone https://github.com/yourusername/HOSPITAL.git
    cd HOSPITAL
-Create and activate a virtual environment:
 
 2. **Create and activate a virtual environment:**
    ```bash
    Copy code
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   Install the dependencies:
 
 3. **Install the dependencies:**
    ```bash
@@ -37,18 +35,17 @@ Create and activate a virtual environment:
    pip install -r requirements.txt
    Apply database migrations:
 
-3. **Apply database migrations:**
+4. **Apply database migrations:**
    ```bash
    Copy code
    python manage.py migrate
-   Run the development server:
 
-3. **Run the development server:**
+5. **Run the development server:**
    ```bash
    Copy code
    python manage.py runserver
-   Access the application:
-   Open your web browser and go to http://127.0.0.1:8000/.
+
+Open your web browser and go to http://127.0.0.1:8000/.
 
 Usage
 Admin Panel:
