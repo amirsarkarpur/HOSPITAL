@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ medication.name }} - جزئیات دارو</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .detail {
+            margin-bottom: 20px;
+        }
+        .detail label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ medication.name }}</h1>
+        <div class="detail">
+            <label>نام:</label>
+            <p>{{ medication.name }}</p>
+        </div>
+        <div class="detail">
+            <label>توضیحات:</label>
+            <p>{{ medication.description }}</p>
+        </div>
+        <div class="detail">
+            <label>عوارض:</label>
+            <p>{{ medication.Complications }}</p>
+        </div>
+        <div class="detail">
+            <label>نحوه مصرف:</label>
+            <p>{{ medication.How_to_use }}</p>
+        </div>
+        <div class="detail">
+            <label>تاریخ انقضا:</label>
+            <p>{{ medication.expiration_date }}</p>
+        </div>
+        <div class="detail">
+            <label>تاریخ تولید:</label>
+            <p>{{ medication.Production_date }}</p>
+        </div>
+        <div class="detail">
+            <label>قیمت:</label>
+            <p>{{ medication.price }}</p>
+        </div>
+        <div class="detail">
+            <label>نوع دارو:</label>
+            <p>{{ medication.get_Medication_type_display }}</p>
+        </div>
+    </div>
+</body>
+</html>

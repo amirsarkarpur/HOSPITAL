@@ -1,0 +1,92 @@
+<!-- templates/show_patient_ditail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .patient-detail {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Doctor Details</h1>
+        <nav>
+            <a href="{% url 'show_doctor_list' %}">Doctor List</a>
+        </nav>
+    </header>
+
+    <main>
+        {% if show %}
+            <div class="patient-detail">
+                <h2>{{ show.first_name }} {{ show.last_name }}</h2>
+                <p><strong>Full Name:</strong> {{ show.full_name }}</p>
+                <p><strong>Medical license number:</strong> {{ show.Medical_license_number }}</p>
+                <p><strong>Expertise:</strong> {{ show.Expertise }}</p>
+                <p><strong>Phone Number:</strong> {{ show.phone_number }}</p>
+                <p><strong>Marital Status:</strong> {{ show.get_marital_status_display }}</p>
+                <p><strong>Gender:</strong> {{ show.get_gender_display }}</p>
+                <a href="{% url 'show_doctor_list' %}">Back to doctor List</a>
+            </div>
+        {% else %}
+            <p>Doctor not found.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+</body>
+</html>

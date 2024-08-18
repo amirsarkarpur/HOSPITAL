@@ -1,0 +1,108 @@
+<!-- show_prescription_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات نسخه</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .detail-section {
+            margin-top: 20px;
+        }
+        .detail-section h2 {
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .detail-section p {
+            font-size: 16px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>جزئیات نسخه</h1>
+        <div class="detail-section">
+            <h2>اطلاعات نسخه</h2>
+            <p><strong>شماره نسخه:</strong> {{ show2.id }}</p>
+            <p><strong>بیمار:</strong> {{ show2.patient.name }}</p>
+            <p><strong>پزشک:</strong> {{ show2.doctor.name }}</p>
+            <p><strong>نوع بیماری:</strong> {{ show2.type_of_disease }}</p>
+            <p><strong>تاریخ بارگذاری:</strong> {{ show2.upload }}</p>
+        </div>
+
+        <div class="detail-section">
+            <h2>داروهای تجویز شده</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>دارو</th>
+                        <th>توضیحات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for add_prescription in show %}
+                        <tr>
+                            <td>{{ add_prescription.medication }}</td>
+                            <td>{{ add_prescription.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{% url 'prescription_list' %}" class="button">بازگشت به لیست نسخه‌ها</a>
+    </div>
+</body>
+</html>

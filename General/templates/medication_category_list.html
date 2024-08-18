@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دسته‌بندی داروها</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .category {
+            margin-bottom: 15px;
+        }
+        .category-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .category-button:hover {
+            background-color: #0056b3;
+        }
+        .medication-list {
+            display: none;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .medication-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .medication-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .medication-list li a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .medication-list li a:hover {
+            text-decoration: underline;
+        }
+        .medication-list .empty {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for category in categories %}
+        <div class="category">
+            <button class="category-button" data-category="{{ category }}">
+                {{ category|title }}
+            </button>
+            <div class="medication-list" id="category-{{ category }}">
+                <ul>
+                    {% if category == 'pill' %}
+                        {% for medication in pill %}
+                        <li>
+                            <a href="{% url 'medication_detail' medication.id %}">
+                                {{ medication.name }} - {{ medication.number }} عدد
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="empty">دارویی موجود نیست.</li>
+                        {% endfor %}
+                    {% elif category == 'Sherbet' %}
+                        {% for medication in Sherbet %}
+                        <li>
+                            <a href="{% url 'medication_detail' medication.id %}">
+                                {{ medication.name }} - {{ medication.number }} عدد
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="empty">دارویی موجود نیست.</li>
+                        {% endfor %}
+                    {% elif category == 'serum' %}
+                        {% for medication in serum %}
+                        <li>
+                            <a href="{% url 'medication_detail' medication.id %}">
+                                {{ medication.name }} - {{ medication.number }} عدد
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="empty">دارویی موجود نیست.</li>
+                        {% endfor %}
+                    {% elif category == 'ampoule' %}
+                        {% for medication in ampoule %}
+                        <li>
+                            <a href="{% url 'medication_detail' medication.id %}">
+                                {{ medication.name }} - {{ medication.number }} عدد
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="empty">دارویی موجود نیست.</li>
+                        {% endfor %}
+                    {% elif category == 'powder' %}
+                        {% for medication in powder %}
+                        <li>
+                            <a href="{% url 'medication_detail' medication.id %}">
+                                {{ medication.name }} - {{ medication.number }} عدد
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="empty">دارویی موجود نیست.</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.category-button');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const categoryId = button.getAttribute('data-category');
+                    const list = document.getElementById(`category-${categoryId}`);
+
+                    // Toggle display of medication list
+                    if (list.style.display === 'block') {
+                        list.style.display = 'none';
+                    } else {
+                        // Hide other lists
+                        document.querySelectorAll('.medication-list').forEach(item => {
+                            item.style.display = 'none';
+                        });
+                        list.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

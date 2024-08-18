@@ -1,0 +1,143 @@
+<!-- show_add_prescription.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافه کردن دارو</title>
+    <style>
+        /* General styling for the form */
+        form {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        /* Styling for form rows */
+        .form-row {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        /* Styling for form inputs */
+        .form-row input, .form-row textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Styling for buttons */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for the remove button */
+        .remove-form {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .remove-form:hover {
+            background-color: #c82333;
+        }
+
+        /* Styling for the add form button */
+        #add-form {
+            margin-top: 20px;
+            background-color: #28a745;
+        }
+
+        #add-form:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.management_form }}
+        {{ formset.management_form }}
+        {{ form.as_p }}
+
+        <div id="formset-container">
+            {% for form in formset %}
+                <div class="form-row">
+                    {{ form.as_p }}
+                    <button type="button" class="remove-form">حذف</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-form">افزودن دارو</button>
+        <button type="submit">ثبت نسخه</button>
+    </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formContainer = document.getElementById('formset-container');
+        const addFormButton = document.getElementById('add-form');
+
+        addFormButton.addEventListener('click', function() {
+            const totalForms = parseInt(document.getElementById('id_form-TOTAL_FORMS').value);
+            const newFormIndex = totalForms;
+
+            // Clone the first form row template
+            const formTemplate = document.querySelector('.form-row');
+            const newFormHtml = formTemplate.outerHTML
+                .replace(/form-(\d+)/g, `form-${newFormIndex}`)
+                .replace(/id_form-(\d+)/g, `id_form-${newFormIndex}`);
+
+            // Update total forms count
+            document.getElementById('id_form-TOTAL_FORMS').value = totalForms + 1;
+
+            // Insert new form row
+            formContainer.insertAdjacentHTML('beforeend', newFormHtml);
+
+            // Set new form's inputs to empty values
+            const newForm = formContainer.lastElementChild;
+            newForm.querySelectorAll('input, textarea').forEach(input => input.value = '');
+
+            // Add event listener to the new remove button
+            newForm.querySelector('.remove-form').addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+
+        // Initial event listener for existing remove buttons
+        document.querySelectorAll('.remove-form').forEach(button => {
+            button.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+    });
+    </script>
+</body>
+</html>
